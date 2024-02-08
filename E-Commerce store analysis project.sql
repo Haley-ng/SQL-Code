@@ -58,24 +58,6 @@ FROM customers
 GROUP BY customer_id
 HAVING count(*)>1
 ;
--- DELETING METHOD 1
-"DELETE FROM customers
-WHERE customer_id NOT IN (
-	SELECT MAX(customer_id)
-	FROM customers
-	GROUP BY customer_id, customer_zip_code_prefix, customer_city, customer_state)
-;"
--- DELETING METHOD 2
-"DELETE FROM customers
-WHERE customer_id IN (
-	SELECT customer_id
-    FROM (
-		SELECT customer_id
-		FROM customers
-		GROUP BY customer_id
-		HAVING count(*)>1
-    ) AS duplicates
-);"
 
 -- Change Data type to date
 ALTER table orders
