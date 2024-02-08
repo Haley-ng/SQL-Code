@@ -51,13 +51,6 @@ DROP COLUMN order_delivered_time,
 DROP COLUMN order_approved_date,
 DROP COLUMN order_approved_time;
 
--- DELETE DUPLICATED customer_id
--- Check duplicated rows
-SELECT customer_id, COUNT(*) AS duplicate_row
-FROM customers
-GROUP BY customer_id
-HAVING count(*)>1
-;
 
 -- Change Data type to date
 ALTER table orders
